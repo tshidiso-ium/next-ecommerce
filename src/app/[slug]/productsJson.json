@@ -1,0 +1,52 @@
+ {
+  "items": [
+    {
+      "_id": "1",
+      "slug": "product-1",
+      "name": "Awesome Product 1",
+      "price": { "price": 2999.99 },
+      "media": {
+        "mainMedia": { "image": { "url": "https://firebasestorage.googleapis.com/v0/b/my-profile-95716.firebasestorage.app/o/custom-dunk-low-premium.png?alt=media&token=8f014243-2662-42b9-8efd-fc2eeeb5b60c" } },
+        "items": [
+          { "image": { "url": "https://firebasestorage.googleapis.com/v0/b/my-profile-95716.firebasestorage.app/o/custom-dunk-low-premium.png?alt=media&token=8f014243-2662-42b9-8efd-fc2eeeb5b60c" } }
+        ]
+      },
+      "additionalInfoSections": [
+        { "title": "Short Desciption", "description": "This is a short description of Awesome Product 1." }
+      ]
+    },
+    {
+      "_id": "2",
+      "slug": "product-2",
+      "name": "Awesome Product 2",
+      "price": { "price": 3999.99 },
+      "media": {
+        "mainMedia": { "image": { "url": "https://firebasestorage.googleapis.com/v0/b/my-profile-95716.firebasestorage.app/o/nike-5.jpg?alt=media&token=ecbfc076-9d28-47df-8a97-a927db874b9a" } },
+        "items": [
+          { "image": { "url": "https://firebasestorage.googleapis.com/v0/b/my-profile-95716.firebasestorage.app/o/nike-5.jpg?alt=media&token=ecbfc076-9d28-47df-8a97-a927db874b9a" } }
+        ]
+      },
+      "additionalInfoSections": [
+        { "title": "Short Desciption", "description": "This is a short description of Awesome Product 2." }
+      ]
+    },
+    {
+      "_id": "3",
+      "slug": "product-3",
+      "name": "Awesome Product 3",
+      "price": { "price": 3499.99 },
+      "media": {
+        "mainMedia": { "image": { "url": "https://firebasestorage.googleapis.com/v0/b/my-profile-95716.firebasestorage.app/o/nike-3.jpg?alt=media&token=05b08262-10e1-4afa-a237-4328e8829502" } },
+        "items": [
+          { "image": { "url": "https://firebasestorage.googleapis.com/v0/b/my-profile-95716.firebasestorage.app/o/nike-3.jpg?alt=media&token=05b08262-10e1-4afa-a237-4328e8829502" } }
+        ]
+      },
+      "additionalInfoSections": [
+        { "title": "Short Desciption", "description": "This is a short description of Awesome Product 3." }
+      ]
+    }
+  ],
+  "currentPage": 1,
+  "hasPrev": true,
+  "hasNext": true
+}

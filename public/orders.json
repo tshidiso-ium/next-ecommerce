@@ -1,0 +1,48 @@
+[
+  {
+    "_id": "1",
+    "billingInfo": {
+      "contactDetails": {
+        "firstName": "John",
+        "lastName": "Doe"
+      },
+      "address": {
+        "addressLine1": "123 Main St",
+        "city": "Anytown"
+      }
+    },
+    "buyerInfo": {
+      "email": "john.doe@example.com"
+    },
+    "priceSummary": {
+      "subtotal": {
+        "amount": "100.00"
+      }
+    },
+    "paymentStatus": "Paid",
+    "status": "Shipped"
+  },
+  {
+    "_id": "2",
+    "billingInfo": {
+      "contactDetails": {
+        "firstName": "Jane",
+        "lastName": "Smith"
+      },
+      "address": {
+        "addressLine1": "456 Elm St",
+        "city": "Othertown"
+      }
+    },
+    "buyerInfo": {
+      "email": "jane.smith@example.com"
+    },
+    "priceSummary": {
+      "subtotal": {
+        "amount": "150.00"
+      }
+    },
+    "paymentStatus": "Pending",
+    "status": "Processing"
+  }
+]

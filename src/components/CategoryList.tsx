@@ -1,15 +1,15 @@
-import { wixClientServer } from "@/lib/wixClientServer";
+// import { wixClientServer } from "@/lib/wixClientServer";
 import Image from "next/image";
 import Link from "next/link";
 
 const CategoryList = async () => {
-  const wixClient = await wixClientServer();
+  // const wixClient = await wixClientServer();
 
-  const cats = await wixClient.collections.queryCollections().find();
+  // const cats = await wixClient.collections.queryCollections().find();
 
   return (
     <div className="px-4 overflow-x-scroll scrollbar-hide">
-      <div className="flex gap-4 md:gap-8">
+      {/* <div className="flex gap-4 md:gap-8">
         {cats.items.map((item) => (
           <Link
             href={`/list?cat=${item.slug}`}
@@ -30,7 +30,7 @@ const CategoryList = async () => {
             </h1>
           </Link>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

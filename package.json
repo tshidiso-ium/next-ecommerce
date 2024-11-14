@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export"
   },
   "dependencies": {
     "@wix/ecom": "^1.0.540",
@@ -21,7 +22,8 @@
     "react-confetti": "^6.1.0",
     "react-dom": "^18",
     "timeago.js": "^4.0.2",
-    "zustand": "^4.5.2"
+    "zustand": "^4.5.2",
+    "firebase": "^10.12.2"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",

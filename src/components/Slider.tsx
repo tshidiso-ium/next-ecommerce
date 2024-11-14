@@ -4,43 +4,53 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const slides = [
-  {
-    id: 1,
-    title: "Summer Sale Collections",
-    description: "Sale! Up to 50% off!",
-    img: "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=800",
-    url: "/",
-    bg: "bg-gradient-to-r from-yellow-50 to-pink-50",
-  },
-  {
-    id: 2,
-    title: "Winter Sale Collections",
-    description: "Sale! Up to 50% off!",
-    img: "https://images.pexels.com/photos/1021693/pexels-photo-1021693.jpeg?auto=compress&cs=tinysrgb&w=800",
-    url: "/",
-    bg: "bg-gradient-to-r from-pink-50 to-blue-50",
-  },
-  {
-    id: 3,
-    title: "Spring Sale Collections",
-    description: "Sale! Up to 50% off!",
-    img: "https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800",
-    url: "/",
-    bg: "bg-gradient-to-r from-blue-50 to-yellow-50",
-  },
-];
+// Define the type for a slide object
+interface Slide {
+  id: number;
+  title: string;
+  description: string;
+  img: string;
+  url: string;
+  bg: string;
+}
 
 const Slider = () => {
+  const [slideData, setSlideData] = useState<Slide[]>([]);
   const [current, setCurrent] = useState(0);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  //   }, 3000);
+  useEffect(() => {
+    const getSliderList = async () => {
+      try {
+        const fetchedSlides = await getSlider();
+        setSlideData(fetchedSlides);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.error("Slider fetching error: ", err.message);
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred while fetching slider.");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    getSliderList();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev === slideData.length - 1 ? 0 : prev + 1));
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [slideData]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!slideData.length) return <div>No slides available.</div>;
 
   return (
     <div className="h-[calc(100vh-80px)] overflow-hidden">
@@ -48,7 +58,7 @@ const Slider = () => {
         className="w-max h-full flex transition-all ease-in-out duration-1000"
         style={{ transform: `translateX(-${current * 100}vw)` }}
       >
-        {slides.map((slide) => (
+        {slideData.map((slide) => (
           <div
             className={`${slide.bg} w-screen h-full flex flex-col gap-16 xl:flex-row`}
             key={slide.id}
@@ -81,12 +91,12 @@ const Slider = () => {
         ))}
       </div>
       <div className="absolute m-auto left-1/2 bottom-8 flex gap-4">
-        {slides.map((slide, index) => (
+        {slideData.map((_, index) => (
           <div
-            className={`w-3 h-3  rounded-full ring-1 ring-gray-600 cursor-pointer flex items-center justify-center ${
+            className={`w-3 h-3 rounded-full ring-1 ring-gray-600 cursor-pointer flex items-center justify-center ${
               current === index ? "scale-150" : ""
             }`}
-            key={slide.id}
+            key={index}
             onClick={() => setCurrent(index)}
           >
             {current === index && (
@@ -97,6 +107,28 @@ const Slider = () => {
       </div>
     </div>
   );
+};
+
+// Data-fetching function
+const getSlider = async (): Promise<Slide[]> => {
+  try {
+    const response = await fetch("http://localhost:3100/getSlider", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) throw new Error("Failed to fetch slides");
+    const slides: Slide[] = await response.json();
+    return slides;
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("Error fetching slides: ", err.message);
+      throw new Error(`Failed to fetch slides: ${err.message}`);
+    } else {
+      throw new Error("An unknown error occurred while fetching slides.");
+    }
+  }
 };
 
 export default Slider;
