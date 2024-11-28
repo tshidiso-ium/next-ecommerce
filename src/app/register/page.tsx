@@ -13,10 +13,10 @@ enum MODE {
   EMAIL_VERIFICATION = "EMAIL_VERIFICATION",
 }
 
-const LoginPage: React.FC = () => {
+const RegisterPage: React.FC = () => {
 	const router = useRouter();
 
-	const [mode, setMode] = useState<MODE>(MODE.LOGIN);
+	const [mode, setMode] = useState<MODE>(MODE.REGISTER);
 	const [username, setUsername] = useState<string>("");
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
@@ -53,11 +53,11 @@ const LoginPage: React.FC = () => {
 			let response;
 			switch (mode) {
 				case MODE.LOGIN:
-          			response = await signInAndVerify(email, password);
+          response = await signInAndVerify(email, password);
 					if (response.data.uid) {
-						console.log("Login successful! Redirecting...");
-						localStorage.setItem("userID", response.data.uid);
-						localStorage.setItem("idToken", response.idToken);
+            console.log("Login successful! Redirecting...");
+            localStorage.setItem("userID", response.data.uid);
+            localStorage.setItem("idToken", response.idToken);
 						setMessage("Login successful! Redirecting...");
 						router.push("/");
 					} else {
@@ -259,25 +259,6 @@ async function handleRegister(userName: string, email: string, password: string)
 	);
 };
 
-// const registerUser = async (email: string, password: string ) : Promise<any> => {
-//   try{
-//     console.log("email: ", email);
-// 		const url = new URL("http://localhost:3100/verifyUser");
-// 		url.searchParams.append("idToken", idToken);
-
-// 		const res = await fetch(url.toString(), {
-// 			method: "POST", // Use POST for sensitive data
-// 			headers: {
-// 				"Content-Type": "application/json",
-// 			},
-// 		});
-//   }
-//   catch(err){
-//     console.error("RegisterUser: Error", err);
-//     throw err;
-//   }
-// } 
-
 
 const verifyUser = async (idToken: string): Promise<any> => {
   try {
@@ -334,4 +315,4 @@ const createUser = async (userName: string, email: string, password: string ) : 
   }
 };
 
-export default LoginPage;
+export default RegisterPage;
